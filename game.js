@@ -65,7 +65,7 @@ class BaseDeck {
 }
 
 function initializeGame() {
-	deck = new deckBase;
+	deck = new BaseDeck;
 	let deckorder = deck.toString();
-	document.getElementById("displayBlock").innerHTML = deckorder;
+	document.getElementById("displayBlock").innerText = deckorder;
 }
