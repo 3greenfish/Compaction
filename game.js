@@ -66,6 +66,7 @@ class BaseDeck {
 
 function initializeGame() {
 	deck = new BaseDeck;
+	shuffle();
 	let deckorder = deck.order.toString();
 	let specificCard = getCard(28);
 	let displayText = deckorder + " -- " + specificCard;
@@ -74,11 +75,21 @@ function initializeGame() {
 
 function shuffle() {
 	for (let i = deck.order.length - 1; i > 0; i--) {
-		let getCard = Math.floor(Math.random * i);
+		let getCard = Math.floor(Math.random * (i + 1));
 		let targetCard = deck.order[i];
-		deck.order[i] = getCard;
+		deck.order[i] = deck.order[getCard];
 		deck.order[getCard] = targetCard;
 	}
+}
+
+function makeRandom(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    return arr;
 }
 
 function getCard(value, reqSplit) {
