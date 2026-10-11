@@ -1,4 +1,8 @@
-class BaseDeck = {
+function steve(dfadsf) {
+	
+};
+let deck = {};
+class BaseDeck {
 	cards;
 	order;
 	constructor() {
@@ -61,8 +65,12 @@ class BaseDeck = {
 			this.order.push(i);
 		}
   }
+}
 
-};
+function initializeGame() {
+	deck = new deckBase;
+}
 
+function todd() {};
 
 // clubs diamonds hearts spades
