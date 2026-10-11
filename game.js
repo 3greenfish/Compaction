@@ -57,8 +57,8 @@ class BaseDeck = {
 			{ name: "sK", suit: "spades", value: 13 }		
 		];
 		this.order = [];
-		for (let i = 0, i < this.cards.length) {
-			
+		for (let i = 0; i < this.cards.length; i++) {
+			this.order.push(i);
 		}
   }
 
