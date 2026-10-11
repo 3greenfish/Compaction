@@ -67,5 +67,21 @@ class BaseDeck {
 function initializeGame() {
 	deck = new BaseDeck;
 	let deckorder = deck.order.toString();
-	document.getElementById("displayBlock").innerText = deckorder;
+	let specificCard = getCard(28);
+	let displayText = deckorder + " -- " + specificCard;
+	document.getElementById("displayBlock").innerText = displayText;
 }
+
+function getCard(value, reqSplit) {
+	let card = deck.cards[value];
+	if (reqSplit == true) {
+		let cardInfo = {};
+		cardInfo.suit = card.suit;
+		cardInfo.value = card.value;
+		return cardInfo;
+	} else {
+		return card.name;
+	}
+}
+
+
