@@ -1,6 +1,3 @@
-function steve(dfadsf) {
-	
-};
 let deck = {};
 class BaseDeck {
 	cards;
@@ -69,8 +66,6 @@ class BaseDeck {
 
 function initializeGame() {
 	deck = new deckBase;
+	let deckorder = deck.toString();
+	document.getElementById("displayBlock").innerHTML = deckorder;
 }
-
-function todd() {};
-
-// clubs diamonds hearts spades
