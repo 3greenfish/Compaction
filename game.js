@@ -72,6 +72,15 @@ function initializeGame() {
 	document.getElementById("displayBlock").innerText = displayText;
 }
 
+function shuffle() {
+	for (let i = deck.order.length - 1; i > 0; i--) {
+		let getCard = Math.floor(Math.random * i);
+		let targetCard = deck.order[i];
+		deck.order[i] = getCard;
+		deck.order[getCard] = targetCard;
+	}
+}
+
 function getCard(value, reqSplit) {
 	let card = deck.cards[value];
 	if (reqSplit == true) {
