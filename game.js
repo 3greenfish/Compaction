@@ -75,7 +75,7 @@ function initializeGame() {
 
 function shuffle() {
 	for (let i = deck.order.length - 1; i > 0; i--) {
-		let getCard = Math.floor(Math.random * (i + 1));
+		let getCard = Math.floor(Math.random() * (i + 1));
 		let targetCard = deck.order[i];
 		deck.order[i] = deck.order[getCard];
 		deck.order[getCard] = targetCard;
