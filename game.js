@@ -1,4 +1,5 @@
 let deck = {};
+let layout = {};
 class BaseDeck {
 	cards;
 	order;
@@ -70,8 +71,19 @@ function initializeGame() {
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
-	let displayText = deckorder + " -- " + specificCard;
-	document.getElementById("displayBlock").innerText = displayText;
+//	let displayText = deckorder + " -- " + specificCard;
+	getScreenSize();	
+	let displayText = "width: " + layout.width + ", height: " + layout.height;
+
+	let displayBlock = document.getElementById("displayBlock");
+
+	displayBlock.innerText = displayText;
+	displayBlock.style.border = "1px solid blue";
+}
+
+function getScreenSize() {
+	layout.width = window.innerWidth;
+	layout.height = window.innerHeight;
 }
 
 function shuffle() {
