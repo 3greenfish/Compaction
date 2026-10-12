@@ -1,4 +1,10 @@
 #displayBlock {
-  display: inline-block;
+  display: block;
   border: 1px solid red;
+}
+
+#playGrid {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+  grid-template-rows: 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px;
 }
