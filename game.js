@@ -79,6 +79,10 @@ function initializeGame() {
 
 	displayBlock.innerText = displayText;
 	displayBlock.style.border = "1px solid blue";
+	displayBlock.style.width = layout.width;
+	displayBlock.style.height = layout.height;
+
+
 }
 
 function getScreenSize() {
