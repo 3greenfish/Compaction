@@ -107,6 +107,12 @@ function buildGrid(tilesWide, tilesHigh) {
 		}
 		output += addDiv;
 	}
+
+//	columnStyle = tilesWide + "
+//	rowStyle =
+	
+//	targetDiv.classList.add();
+	
 	targetDiv.innerHTML = output;
 }
 
