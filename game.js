@@ -71,14 +71,15 @@ function initializeGame() {
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
-//	let displayText = deckorder + " -- " + specificCard;
 	getScreenSize();	
-	let displayText = "width: " + layout.width + ", height: " + layout.height;
+	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard;
+	
 
 	let displayBlock = document.getElementById("displayBlock");
 
-//	displayBlock.innerText = displayText;
-//	displayBlock.style.border = "1px solid blue";
+	let messagesHere = document.getElementById("messageBlock");
+	messagesHere.innerText = displayText;
+	messagesHere.style.border = "1px solid blue";
 	displayBlock.style.width = layout.width;
 	displayBlock.style.height = layout.height;
 
