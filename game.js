@@ -82,7 +82,7 @@ function initializeGame() {
 	displayBlock.style.width = layout.width;
 	displayBlock.style.height = layout.height;
 
-	buildGrid(5,5);
+	buildGrid(11,5);
 }
 
 function getScreenSize() {
