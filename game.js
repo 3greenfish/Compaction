@@ -101,7 +101,10 @@ function buildGrid(tilesWide, tilesHigh) {
 		let spaceId = rowCounter.toString(16) + columnCounter.toString(16) + " / " + i;
 		let addDiv = `<div>${spaceId}</div>`;
 		columnCounter += 1;
-		rowCounter += 1;
+		if (columnCounter > tilesWide) {
+			columnCounter = 1;
+			rowCounter += 1;
+		}
 		output += addDiv;
 	}
 	targetDiv.innerHTML = output;
