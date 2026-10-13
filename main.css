@@ -1,15 +1,37 @@
 #displayBlock {
-  display: block;
-  border: 1px solid red;
+	display: block;
+	border: 1px solid red;
 }
 
 #playGrid {
-  display: grid;
-  grid-template-columns: 40px 40px 40px 40px 40px; // 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-  grid-template-rows: 56px 56px 56px 56px 56px; // 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px;
+	display: grid;
 }
 
+.5columns { grid-template-columns: 40px 40px 40px 40px 40px; }
+.6columns { grid-template-columns: 40px 40px 40px 40px 40px 40px; }
+.7columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px; }
+.8columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px; }
+.9columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.10columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.11columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.12columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.13columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.14columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.15columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+
+.5rows { grid-template-rows: 56px 56px 56px 56px 56px; }
+.6rows { grid-template-rows: 56px 56px 56px 56px 56px 56px; }
+.7rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+
 #playGrid div {
-  background: #eeeeee;
-  border: 1px solid white;
+	background: #eeeeee;
+	border: 1px solid white;
 }
