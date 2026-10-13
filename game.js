@@ -82,13 +82,36 @@ function initializeGame() {
 	displayBlock.style.width = layout.width;
 	displayBlock.style.height = layout.height;
 
-
+	buildGrid(5,5);
 }
 
 function getScreenSize() {
 	layout.width = window.innerWidth;
 	layout.height = window.innerHeight;
 }
+
+function buildGrid(tilesWide, tilesHigh) {
+	let targetDiv = document.getElementById("playGrid");
+	let totalSpaces = tilesWide * tilesHigh;
+	let columnCounter = 1;
+	let rowCounter = 1;
+	let output = "";
+	
+	for (let i = 0; i < totalSpaces; i++) {
+		let spaceId = rowCounter.toString(16) + columnCounter.toString(16) + " / " + i;
+		let addDiv = `<div>${spaceId}</div>`;
+		columnCounter += 1;
+		if (columnCounter > tilesWide) {
+			columnCounter = 1;
+			rowCounter += 1;
+		}
+		output += addDiv;
+	}
+	targetDiv.innerHTML = output;
+}
+
+
+
 
 function shuffle() {
 	for (let i = deck.order.length - 1; i > 0; i--) {
