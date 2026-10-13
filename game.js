@@ -108,8 +108,8 @@ function buildGrid(tilesWide, tilesHigh) {
 		output += addDiv;
 	}
 
-	columnStyle = tilesWide + "columns";
-	rowStyle = tilesHigh + "rows";
+	columnStyle = "columns" + tilesWide;
+	rowStyle = "rows" + tilesHigh;
 
 /* figure this out later, how to remove classes
 
