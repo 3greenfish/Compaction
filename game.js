@@ -108,11 +108,19 @@ function buildGrid(tilesWide, tilesHigh) {
 		output += addDiv;
 	}
 
-//	columnStyle = tilesWide + "
-//	rowStyle =
+	columnStyle = tilesWide + "columns";
+	rowStyle = tilesHigh + "rows";
+
+/* figure this out later, how to remove classes
+
+	let classes = targetDiv.classList.length;
+	if (classes > 0) {
+		targetDiv.classList.forEach()
+	}
+	targetDiv.classList.remove();
+*/
 	
-//	targetDiv.classList.add();
-	
+	targetDiv.classList.add(columnStyle, rowStyle);	
 	targetDiv.innerHTML = output;
 }
 
