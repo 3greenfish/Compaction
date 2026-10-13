@@ -7,29 +7,29 @@
 	display: grid;
 }
 
-.5columns { grid-template-columns: 40px 40px 40px 40px 40px; }
-.6columns { grid-template-columns: 40px 40px 40px 40px 40px 40px; }
-.7columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px; }
-.8columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px; }
-.9columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.10columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.11columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.12columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.13columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.14columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
-.15columns { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns5 { grid-template-columns: 40px 40px 40px 40px 40px; }
+.columns6 { grid-template-columns: 40px 40px 40px 40px 40px 40px; }
+.columns7 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px; }
+.columns8 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns9 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns10 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns11 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns12 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns13 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns14 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
+.columns15 { grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px; }
 
-.5rows { grid-template-rows: 56px 56px 56px 56px 56px; }
-.6rows { grid-template-rows: 56px 56px 56px 56px 56px 56px; }
-.7rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px; }
-.8rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px; }
-.9rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.10rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.11rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.12rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.13rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.14rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
-.15rows { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows5 { grid-template-rows: 56px 56px 56px 56px 56px; }
+.rows6 { grid-template-rows: 56px 56px 56px 56px 56px 56px; }
+.rows7 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px; }
+.rows8 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows9 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows10 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows11 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows12 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows13 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows14 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
+.rows15 { grid-template-rows: 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px 56px; }
 
 #playGrid div {
 	background: #eeeeee;
