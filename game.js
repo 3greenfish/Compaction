@@ -77,7 +77,7 @@ function initializeGame() {
 
 	let displayBlock = document.getElementById("displayBlock");
 
-	displayBlock.innerText = displayText;
+//	displayBlock.innerText = displayText;
 //	displayBlock.style.border = "1px solid blue";
 	displayBlock.style.width = layout.width;
 	displayBlock.style.height = layout.height;
