@@ -113,12 +113,12 @@ class BaseDeck {
 
 function initializeGame() {
 	deck = new BaseDeck;
-	shuffle();
+//	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
 	getScreenSize();	
-	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard;
+	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard + "/";
 	
 	let displayBlock = document.getElementById("displayBlock");
 	let messagesHere = document.getElementById("messageBlock");
