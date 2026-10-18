@@ -120,10 +120,12 @@ function initializeGame() {
 	getScreenSize();	
 	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard;
 	
-
 	let displayBlock = document.getElementById("displayBlock");
-
 	let messagesHere = document.getElementById("messageBlock");
+
+	let cardOrder = showOrder();
+	displayText += cardOrder;
+	
 	messagesHere.innerText = displayText;
 	messagesHere.style.border = "1px solid blue";
 	displayBlock.style.width = layout.width;
@@ -176,14 +178,23 @@ function buildGrid(tilesWide, tilesHigh) {
 
 function shuffle() {
 	for (let i = deck.order.length - 1; i > 0; i--) {
-		let getCard = Math.floor(Math.random() * (i + 1));
+		let pickCard = Math.floor(Math.random() * (i + 1));
 		let targetCard = deck.order[i];
-		deck.order[i] = deck.order[getCard];
-		deck.order[getCard] = targetCard;
+		deck.order[i] = deck.order[pickCard];
+		deck.order[pickCard] = targetCard;
 	}
 }
 
-function getCard(value, reqSplit) {
+function showOrder() {
+	let deckArray = [];
+	for (let i = 0; i < deck.order.length; i++){
+		let thisCard = getCard(deck.order[i]);
+		deckArray.push(thisCard);
+	}
+	return deckArray;
+}
+
+function getCard(value, reqSplit = false) {
 	let card = deck.cards[value];
 	if (reqSplit == true) {
 		let cardInfo = {};
