@@ -4,6 +4,51 @@ class BaseDeck {
 	cards;
 	order;
 	constructor() {
+		this.cards = [];
+		for (let s = 0; s < 4; s++) {
+			let suit = "";
+			switch(s) {
+				case 0:
+					suit = "clubs";
+					break;
+				case 1:
+					suit = "diamonds";
+					break;
+				case 2:
+					suit = "hearts";
+					break;
+				case 3:
+					suit = "spades";
+					break;
+			}
+			let shortSuit = suit.charAt(0);
+			for (let v = 0; v < 13; v++) {
+				let val = v + 1;
+				let cardOutput = {};
+				let nameVal = "";
+				switch(val) {
+					case 1:
+						nameVal = shortSuit + "A";
+						break;
+					case 11:
+						nameVal = shortSuit + "J";
+						break;
+					case 12:
+						nameVal = shortSuit + "Q";
+						break;
+					case 13:
+						nameVal = shortSuit + "K";
+						break;
+					default:
+						nameVal = shortSuit + val;
+				}
+				cardOutput.name = nameVal;
+				cardOutput.suit = suit;
+				cardOutput.value = val;
+				this.cards.push(cardOutput);
+			}
+		}
+		/*
 		this.cards = [
 			{ name: "cA", suit: "clubs", value: 1 },
 			{ name: "c2", suit: "clubs", value: 2 },
@@ -57,7 +102,8 @@ class BaseDeck {
 			{ name: "sJ", suit: "spades", value: 11 },
 			{ name: "sQ", suit: "spades", value: 12 },
 			{ name: "sK", suit: "spades", value: 13 }		
-		];
+		]; */
+
 		this.order = [];
 		for (let i = 0; i < this.cards.length; i++) {
 			this.order.push(i);
