@@ -1,5 +1,15 @@
 let deck = {};
 let layout = {};
+let game = {};
+class BaseGame {
+	sizeWidth;
+	sizeHeight;
+	layout;
+	constructor() {
+		this.sizeWidth = 5;
+		this.sizeHeight = 5;
+	}
+}
 class BaseDeck {
 	cards;
 	order;
@@ -21,26 +31,25 @@ class BaseDeck {
 					suit = "spades";
 					break;
 			}
-			let shortSuit = suit.charAt(0);
 			for (let v = 0; v < 13; v++) {
 				let val = v + 1;
 				let cardOutput = {};
-				let nameVal = "";
+				let nameVal = suit.charAt(0);
 				switch(val) {
 					case 1:
-						nameVal = shortSuit + "A";
+						nameVal += "A";
 						break;
 					case 11:
-						nameVal = shortSuit + "J";
+						nameVal += "J";
 						break;
 					case 12:
-						nameVal = shortSuit + "Q";
+						nameVal += "Q";
 						break;
 					case 13:
-						nameVal = shortSuit + "K";
+						nameVal += "K";
 						break;
 					default:
-						nameVal = shortSuit + val;
+						nameVal += val;
 				}
 				cardOutput.name = nameVal;
 				cardOutput.suit = suit;
@@ -113,6 +122,7 @@ class BaseDeck {
 
 function initializeGame() {
 	deck = new BaseDeck;
+	game = new BaseGame;
 //	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
@@ -131,7 +141,7 @@ function initializeGame() {
 	displayBlock.style.width = layout.width;
 	displayBlock.style.height = layout.height;
 
-	buildGrid(13,13);
+	buildGrid(game.sizeWidth, game.sizeHeight);
 }
 
 function getScreenSize() {
@@ -147,8 +157,8 @@ function buildGrid(tilesWide, tilesHigh) {
 	let output = "";
 	
 	for (let i = 0; i < totalSpaces; i++) {
-		let spaceId = rowCounter.toString(16) + columnCounter.toString(16) + " / " + i;
-		let addDiv = `<div>${spaceId}</div>`;
+		let spaceId = rowCounter.toString(16) + columnCounter.toString(16);
+		let addDiv = `<div id="${spaceId}">${i}</div>`;
 		columnCounter += 1;
 		if (columnCounter > tilesWide) {
 			columnCounter = 1;
