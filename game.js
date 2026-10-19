@@ -2,17 +2,17 @@ let deck = {};
 let layout = {};
 let game = {};
 class BaseGame {
-	sizeWidth;
+/*	sizeWidth;
 	sizeHeight;
-	layout;
+	layout; */
 	constructor() {
 		this.sizeWidth = 5;
 		this.sizeHeight = 5;
 	}
 }
 class BaseDeck {
-	cards;
-	order;
+/*	cards;
+	order; */
 	constructor() {
 		this.cards = [];
 		for (let s = 0; s < 4; s++) {
@@ -121,8 +121,8 @@ class BaseDeck {
 }
 
 function initializeGame() {
-	deck = new BaseDeck;
-	game = new BaseGame;
+	deck = new BaseDeck();
+	game = new BaseGame();
 //	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
@@ -167,8 +167,8 @@ function buildGrid(tilesWide, tilesHigh) {
 		output += addDiv;
 	}
 
-	columnStyle = "columns" + tilesWide;
-	rowStyle = "rows" + tilesHigh;
+	let columnStyle = "columns" + tilesWide;
+	let rowStyle = "rows" + tilesHigh;
 
 /* figure this out later, how to remove classes
 
