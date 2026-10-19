@@ -181,7 +181,7 @@ function buildGrid(tilesWide, tilesHigh) {
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
 	targetDiv.innerHTML = output;
-	targetDiv.addEventListener("click",tapTest(event.target.id));
+	targetDiv.addEventListener("click",tapTest());
 }
 
 
