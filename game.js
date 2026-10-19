@@ -184,6 +184,10 @@ function buildGrid(tilesWide, tilesHigh) {
 }
 
 
+function tapTest(id) {
+	let message = "you have clicked on a space identified as " + id;
+	document.getElementById("messageBlock").innerText = message;	
+}
 
 
 function shuffle() {
