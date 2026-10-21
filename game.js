@@ -162,7 +162,7 @@ function buildGrid(tilesWide, tilesHigh) {
 		let addDiv = `<div id="${spaceId}">${i}</div>`;
 
 		let addSourceBox = {};
-		addSourcebox.iteration = i;	//probably not necessary
+		addSourceBox.iteration = i;	//probably not necessary
 		addSourceBox.row = rowCounter;
 		addSourceBox.column = columnCounter;
 		addSourceBox.id = spaceId;
