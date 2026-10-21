@@ -1,5 +1,5 @@
 let deck = {};
-let layout = {};
+let playArea = {};
 let game = {};
 class BaseGame {
 /*	sizeWidth;
@@ -8,6 +8,7 @@ class BaseGame {
 	constructor() {
 		this.sizeWidth = 5;
 		this.sizeHeight = 5;
+		this.layout = [];
 	}
 }
 class BaseDeck {
@@ -128,7 +129,7 @@ function initializeGame() {
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
 	getScreenSize();	
-	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard + "/";
+	let displayText = "width: " + playArea.width + ", height: " + playArea.height + " / " + deckorder + " -- " + specificCard + "/";
 	
 	let displayBlock = document.getElementById("displayBlock");
 	let messagesHere = document.getElementById("messageBlock");
@@ -138,15 +139,15 @@ function initializeGame() {
 	
 	messagesHere.innerText = displayText;
 	messagesHere.style.border = "1px solid blue";
-	displayBlock.style.width = layout.width;
-	displayBlock.style.height = layout.height;
+	displayBlock.style.width = playArea.width;
+	displayBlock.style.height = playArea.height;
 
 	buildGrid(game.sizeWidth, game.sizeHeight);
 }
 
 function getScreenSize() {
-	layout.width = window.innerWidth;
-	layout.height = window.innerHeight;
+	playArea.width = window.innerWidth;
+	playArea.height = window.innerHeight;
 }
 
 function buildGrid(tilesWide, tilesHigh) {
@@ -159,11 +160,23 @@ function buildGrid(tilesWide, tilesHigh) {
 	for (let i = 0; i < totalSpaces; i++) {
 		let spaceId = rowCounter.toString(16) + columnCounter.toString(16);
 		let addDiv = `<div id="${spaceId}">${i}</div>`;
+
+		let addSourceBox = {};
+		addSourcebox.iteration = i;	//probably not necessary
+		addSourceBox.row = rowCounter;
+		addSourceBox.column = columnCounter;
+		addSourceBox.id = spaceId;
+		
+		game.layout.push(addSourceBox);
+		
+		// this text to iterate for next tile.
 		columnCounter += 1;
 		if (columnCounter > tilesWide) {
 			columnCounter = 1;
 			rowCounter += 1;
 		}
+
+		// build grid on page
 		output += addDiv;
 	}
 
