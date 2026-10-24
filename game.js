@@ -1,6 +1,7 @@
 let deck = {};
 let playArea = {};
 let game = {};
+let table = {};
 class BaseGame {
 /*	sizeWidth;
 	sizeHeight;
@@ -185,7 +186,7 @@ function buildGrid(count, columns, rows) {
 		let addDiv = `<div id="g${i}">${i}</div>]`;
 		output += addDiv;
 	}
-	let targetDive = document.getElementById("playGrid");
+	let targetDiv = document.getElementById("playGrid");
 	targetDiv.innerHTML = output;
 
 	//set style based upon size
