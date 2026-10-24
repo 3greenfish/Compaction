@@ -10,6 +10,8 @@ class BaseGame {
 		this.sizeWidth = 5;
 		this.sizeHeight = 5;
 		this.layout = [];
+		this.stack1 = null;
+		this.stack2 = null;
 	}
 }
 class BaseTable {
@@ -253,7 +255,7 @@ function tapTest(id) {
 	let spaceId = id.slice(1);
 	let checkValue = table.spaces[spaceId].valueTest;
 	
-	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}.` ;
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
 	document.getElementById("messageBlock").innerText = message;	
 }
 
