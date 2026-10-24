@@ -11,6 +11,11 @@ class BaseGame {
 		this.layout = [];
 	}
 }
+class BaseTable {
+	constructor() {
+		this.spaces = [];
+	}
+}
 class BaseDeck {
 /*	cards;
 	order; */
@@ -124,6 +129,7 @@ class BaseDeck {
 function initializeGame() {
 	deck = new BaseDeck();
 	game = new BaseGame();
+	table = new BaseTable();
 //	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
@@ -150,11 +156,54 @@ function getScreenSize() {
 	playArea.height = window.innerHeight;
 }
 
-function buildGrid(tilesWide, tilesHigh) {
+function buildSpaceTable(tilesWide, tilesHigh) {
+	let spaceCount = tilesWide * tilesHigh;
+	let columnCounter = 0;
+	let rowCounter = 0;
+
+	//build dataset
+	for (let i = 0; i < spaceCount; i++) {
+		let addSpace = {};
+		addSpace.row = rowCounter;
+		addSpace.column = columnCounter;
+		addSpace.valueTest = "r" + i;
+		table.spaces.push(addSpace);
+
+		// this text to iterate for next tile.
+		columnCounter += 1;
+		if (columnCounter >= tilesWide) {
+			columnCounter = 1;
+			rowCounter += 1;
+		}
+	}
+	buildGrid(spaceCount, tilesWide, tilesHigh);
+}
+function buildGrid(count, columns, rows) {
+	let output = "";
+
+	for (let i = 0; i < count; i ++) {
+		let addDiv = `<div id="g${i}">${i}</div>]`;
+		output += addDiv;
+	}
+	let targetDive = document.getElementById("playGrid");
+	targetDiv.innerHTML = output;
+
+	//set style based upon size
+	let columnStyle = "columns" + columns;
+	let rowStyle = "rows" + rows;
+	
+	targetDiv.classList.add(columnStyle, rowStyle);	
+	targetDiv.addEventListener("click", function(){ 
+		tapTest(event.target.id); 
+	});
+}
+
+/*
+
+
+	
 	let targetDiv = document.getElementById("playGrid");
 	let totalSpaces = tilesWide * tilesHigh;
-	let columnCounter = 1;
-	let rowCounter = 1;
 	let output = "";
 	
 	for (let i = 0; i < totalSpaces; i++) {
@@ -181,7 +230,7 @@ function buildGrid(tilesWide, tilesHigh) {
 	}
 
 	let columnStyle = "columns" + tilesWide;
-	let rowStyle = "rows" + tilesHigh;
+	let rowStyle = "rows" + tilesHigh; */
 
 /* figure this out later, how to remove classes
 
@@ -190,18 +239,17 @@ function buildGrid(tilesWide, tilesHigh) {
 		targetDiv.classList.forEach()
 	}
 	targetDiv.classList.remove();
-*/
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
 	targetDiv.innerHTML = output;
 	targetDiv.addEventListener("click", function(){ 
 		tapTest(event.target.id); 
 	});
-}
+} */
 
 
 function tapTest(id) {
-	let message = "you have clicked on a space identified as " + id;
+	let message = `you have clicked on a space identified as ${id}. ` ;
 	document.getElementById("messageBlock").innerText = message;	
 }
 
