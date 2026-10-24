@@ -175,7 +175,7 @@ function buildSpaceTable(tilesWide, tilesHigh) {
 		// this text to iterate for next tile.
 		columnCounter += 1;
 		if (columnCounter >= tilesWide) {
-			columnCounter = 1;
+			columnCounter = 0;
 			rowCounter += 1;
 		}
 	}
