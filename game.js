@@ -250,7 +250,10 @@ function buildGrid(count, columns, rows) {
 
 
 function tapTest(id) {
-	let message = `you have clicked on a space identified as ${id}. ` ;
+	let spaceId = id.slice(1);
+	let checkValue = table.spaces[spaceId].valueTest;
+	
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}.` ;
 	document.getElementById("messageBlock").innerText = message;	
 }
 
