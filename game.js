@@ -1,18 +1,27 @@
 let deck = {};
-let layout = {};
+let playArea = {};
 let game = {};
+let table = {};
 class BaseGame {
-	sizeWidth;
+/*	sizeWidth;
 	sizeHeight;
-	layout;
+	layout; */
 	constructor() {
 		this.sizeWidth = 5;
 		this.sizeHeight = 5;
+		this.layout = [];
+		this.stack1 = null;
+		this.stack2 = null;
+	}
+}
+class BaseTable {
+	constructor() {
+		this.spaces = [];
 	}
 }
 class BaseDeck {
-	cards;
-	order;
+/*	cards;
+	order; */
 	constructor() {
 		this.cards = [];
 		for (let s = 0; s < 4; s++) {
@@ -121,14 +130,15 @@ class BaseDeck {
 }
 
 function initializeGame() {
-	deck = new BaseDeck;
-	game = new BaseGame;
+	deck = new BaseDeck();
+	game = new BaseGame();
+	table = new BaseTable();
 //	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
 	getScreenSize();	
-	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard + "/";
+	let displayText = "width: " + playArea.width + ", height: " + playArea.height + " / " + deckorder + " -- " + specificCard + "/";
 	
 	let displayBlock = document.getElementById("displayBlock");
 	let messagesHere = document.getElementById("messageBlock");
@@ -138,37 +148,92 @@ function initializeGame() {
 	
 	messagesHere.innerText = displayText;
 	messagesHere.style.border = "1px solid blue";
-	displayBlock.style.width = layout.width;
-	displayBlock.style.height = layout.height;
+	displayBlock.style.width = playArea.width;
+	displayBlock.style.height = playArea.height;
 
-	buildGrid(game.sizeWidth, game.sizeHeight);
+	buildSpaceTable(game.sizeWidth, game.sizeHeight);
 }
 
 function getScreenSize() {
-	layout.width = window.innerWidth;
-	layout.height = window.innerHeight;
+	playArea.width = window.innerWidth;
+	playArea.height = window.innerHeight;
 }
 
-function buildGrid(tilesWide, tilesHigh) {
+function buildSpaceTable(tilesWide, tilesHigh) {
+	let spaceCount = tilesWide * tilesHigh;
+	let columnCounter = 0;
+	let rowCounter = 0;
+
+	//build dataset
+	for (let i = 0; i < spaceCount; i++) {
+		let addSpace = {};
+		addSpace.row = rowCounter;
+		addSpace.column = columnCounter;
+		addSpace.valueTest = "r" + i;
+		table.spaces.push(addSpace);
+
+		// this text to iterate for next tile.
+		columnCounter += 1;
+		if (columnCounter >= tilesWide) {
+			columnCounter = 1;
+			rowCounter += 1;
+		}
+	}
+	buildGrid(spaceCount, tilesWide, tilesHigh);
+}
+function buildGrid(count, columns, rows) {
+	let output = "";
+
+	for (let i = 0; i < count; i ++) {
+		let addDiv = `<div id="g${i}">${i}</div>`;
+		output += addDiv;
+	}
+	let targetDiv = document.getElementById("playGrid");
+	targetDiv.innerHTML = output;
+
+	//set style based upon size
+	let columnStyle = "columns" + columns;
+	let rowStyle = "rows" + rows;
+	
+	targetDiv.classList.add(columnStyle, rowStyle);	
+	targetDiv.addEventListener("click", function(){ 
+		tapTest(event.target.id); 
+	});
+}
+
+/*
+
+
+	
 	let targetDiv = document.getElementById("playGrid");
 	let totalSpaces = tilesWide * tilesHigh;
-	let columnCounter = 1;
-	let rowCounter = 1;
 	let output = "";
 	
 	for (let i = 0; i < totalSpaces; i++) {
 		let spaceId = rowCounter.toString(16) + columnCounter.toString(16);
 		let addDiv = `<div id="${spaceId}">${i}</div>`;
+
+		let addSourceBox = {};
+		addSourceBox.iteration = i;	//probably not necessary
+		addSourceBox.row = rowCounter;
+		addSourceBox.column = columnCounter;
+		addSourceBox.id = spaceId;
+		
+		game.layout.push(addSourceBox);
+		
+		// this text to iterate for next tile.
 		columnCounter += 1;
 		if (columnCounter > tilesWide) {
 			columnCounter = 1;
 			rowCounter += 1;
 		}
+
+		// build grid on page
 		output += addDiv;
 	}
 
-	columnStyle = "columns" + tilesWide;
-	rowStyle = "rows" + tilesHigh;
+	let columnStyle = "columns" + tilesWide;
+	let rowStyle = "rows" + tilesHigh; */
 
 /* figure this out later, how to remove classes
 
@@ -177,13 +242,22 @@ function buildGrid(tilesWide, tilesHigh) {
 		targetDiv.classList.forEach()
 	}
 	targetDiv.classList.remove();
-*/
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
 	targetDiv.innerHTML = output;
+	targetDiv.addEventListener("click", function(){ 
+		tapTest(event.target.id); 
+	});
+} */
+
+
+function tapTest(id) {
+	let spaceId = id.slice(1);
+	let checkValue = table.spaces[spaceId].valueTest;
+	
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
+	document.getElementById("messageBlock").innerText = message;	
 }
-
-
 
 
 function shuffle() {
