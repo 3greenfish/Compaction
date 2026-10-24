@@ -183,7 +183,7 @@ function buildGrid(count, columns, rows) {
 	let output = "";
 
 	for (let i = 0; i < count; i ++) {
-		let addDiv = `<div id="g${i}">${i}</div>]`;
+		let addDiv = `<div id="g${i}">${i}</div>`;
 		output += addDiv;
 	}
 	let targetDiv = document.getElementById("playGrid");
