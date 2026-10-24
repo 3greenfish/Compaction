@@ -149,7 +149,7 @@ function initializeGame() {
 	displayBlock.style.width = playArea.width;
 	displayBlock.style.height = playArea.height;
 
-	buildGrid(game.sizeWidth, game.sizeHeight);
+	buildSpaceTable(game.sizeWidth, game.sizeHeight);
 }
 
 function getScreenSize() {
