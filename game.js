@@ -27,7 +27,7 @@ class BaseGame {
 		];
 	}
 	findCenter() {
-		let centerFound = (this.sizeWidth * this.sizeHeight) - 1 ) / 2;
+		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
 		this.center = centerFound;
 		return centerFound;
 	}
