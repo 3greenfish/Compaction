@@ -73,11 +73,16 @@ class BaseGame {
 			this.layout.push(newArm);
 		}
 		//having built the layout, apply cross-reference materials to the grid.
+		msg("number of layouts: " + this.layout.length);
 		for (let k = 0; k < this.layout.length; k++) {
 			let refLayout = this.layout[k];
+			let displayLayout = refLayout.toString();
+			msg(displayLayout);
+
 			for (let l = 0; l < refLayout.length; l++) {
-				table.spaces[refLayout[l]].layout = k;
-				table.spaces[refLayout[l]].position = l;
+				let space = refLayout[l];
+				table.spaces[space].layout = k;
+				table.spaces[space].position = l;
 			}
 		}
 	}
@@ -333,7 +338,7 @@ function tapTest(id) {
 	let checkValues = table.spaces[spaceId];
 	
 	
-	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.value}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}.` ;
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.valueTest}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}.` ;
 //	document.getElementById("messageBlock").innerText = message;
 
 	msg(message);
