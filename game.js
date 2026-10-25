@@ -229,6 +229,8 @@ function initializeGame() {
 
 	let targetDiv = document.getElementById("playGrid");
 	targetDiv.addEventListener("click", function(event){ tapTest(event.target.id); });
+
+	game.buildLayout();
 }
 
 function getScreenSize() {
@@ -277,7 +279,7 @@ function buildGrid(count, columns, rows) {
 
 	game.findCenter();
 	let findCenter = "g" + game.center;
-	document.getElementById(findCenter).classList.add("highlight");
+//	document.getElementById(findCenter).classList.add("highlight");
 }
 
 /*
@@ -343,10 +345,18 @@ function tapTest(id) {
 
 	msg(message);
 
-	if (spaceId == 0) {
-		game.buildLayout();
+}
+
+function highlightArms() {
+	for (let i = 0; i < game.layout.length; i++) {
+		let targetLayout = game.layout[i];
+		for (let j = 0; j < targetLayout.length; j++) {
+			let targetSpace = targetLayout[j];
+			document.getElementById(targetSpace).classList.add("highlight");
+		}
 	}
 }
+
 
 
 function shuffle() {
