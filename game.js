@@ -53,11 +53,15 @@ class BaseGame {
 					side = this.sizeWidth;
 			}
 			for (let j = 0; j < refArm.length; j++) {
-				
+				let nextSpot;
+				if (refArm[j] == "out") {
+					nextSpot = currentSpot + out;
+				} else if (refArm[j] == "side") {
+					nextSpot = currentSpot + side;
+				}
+				newArm.push(nextSpot);
+				currentSpot = nextSpot;
 			}
-
-
-			
 		}
 	}
 }
