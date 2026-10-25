@@ -220,7 +220,8 @@ function buildGrid(count, columns, rows) {
 	});
 
 	game.findCenter();
-	document.getElementById(game.center).classList.add("highlight");
+	let findCenter = "g" + game.center;
+	document.getElementById(findCenter).classList.add("highlight");
 }
 
 /*
