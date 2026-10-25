@@ -329,9 +329,10 @@ function buildGrid(count, columns, rows) {
 
 function tapTest(id) {
 	let spaceId = id.slice(1);
-	let checkValue = table.spaces[spaceId].valueTest;
+	let checkValues = table.spaces[spaceId];
 	
-	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
+	
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.value}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}.` ;
 //	document.getElementById("messageBlock").innerText = message;
 
 	msg(message);
