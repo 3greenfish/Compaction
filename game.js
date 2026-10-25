@@ -7,60 +7,76 @@ class BaseGame {
 	sizeHeight;
 	layout; */
 	constructor() {
+		this.deals = 0;
 		this.sizeWidth = 15;
 		this.sizeHeight = 15;
 		this.layout = [];
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
-		this.northbase = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
-		this.southbase = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
-		this.eastbase = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
-		this.westbase = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase0 = ["final"];
+		this.stackBase1 = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
+		this.stackBase2 = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
+		this.stackBase3 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase4 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 	}
 	findCenter() {
 		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
 		this.center = centerFound;
 		return centerFound;
 	}
-	buildArms() {
-		this.arms = [];
-		for (let i = 0; i < 4; i++) {
+	buildLayout() {
+		for (let i = 0; i < 5; i++) {
 			let newArm = [];
-			let refArm;
+			let refArm = this.stackBase + i;
 			let out;
 			let side;
 			let currentSpot = this.center;
 			switch(i) {
 				case 0:
-					refArm = this.northbase;
+					break;
+				case 1:
+//					refArm = this.northbase;
 					out = -this.sizeWidth;
 					side = -1;
 					break;
-				case 1:
-					refArm = this.eastbase;
+				case 2:
+//					refArm = this.eastbase;
 					out = 1;
 					side = -this.sizeWidth;
 					break;
-				case 2:
-					refArm = this.southbase;
+				case 3:
+//					refArm = this.southbase;
 					out = this.sizeWidth;
 					side = 1;
 					break;
 				case 3:
-					refArm = this.eastbase;
+//					refArm = this.eastbase;
 					out = -1;
 					side = this.sizeWidth;
-			}
+			}			
 			for (let j = 0; j < refArm.length; j++) {
 				let nextSpot;
+
 				if (refArm[j] == "out") {
 					nextSpot = currentSpot + out;
 				} else if (refArm[j] == "side") {
 					nextSpot = currentSpot + side;
+				} else if (refArm[j] == "Final") {
+					table.spaces[currentSpot].type = "final";
+					nextSpot = currentSpot;
 				}
 				newArm.push(nextSpot);
 				currentSpot = nextSpot;
+			}
+			this.layout.push(newArm);
+		}
+		//having built the layout, apply cross-reference materials to the grid.
+		for (let k = 0; k < this.layout.length; k++) {
+			let refLayout = this.layout[k];
+			for (let l = 0; l < this.layout.length; l++) {
+				table.spaces[refLayout[l]].layout = k;
+				table.spaces[refLayout[l]].position = l;
 			}
 		}
 	}
