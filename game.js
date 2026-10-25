@@ -328,7 +328,7 @@ function buildGrid(count, columns, rows) {
 
 
 function tapTest(id) {
-	if (!id || id.startsWith("g")) { return; }
+	if (!id || !id.startsWith("g")) { return; }
 	let spaceId = id.slice(1);
 	let checkValues = table.spaces[spaceId];
 	
