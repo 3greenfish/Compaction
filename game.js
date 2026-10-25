@@ -13,23 +13,52 @@ class BaseGame {
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
-		this.northbase = [
-			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
-		];
-		this.southbase = [
-			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
-		];
-		this.eastbase = [
-			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
-		];
-		this.westbase = [
-			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
-		];
+		this.northbase = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
+		this.southbase = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
+		this.eastbase = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.westbase = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 	}
 	findCenter() {
 		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
 		this.center = centerFound;
 		return centerFound;
+	}
+	buildArms() {
+		this.arms = [];
+		for (let i = 0; i < 4; i++) {
+			let newArm = [];
+			let refArm;
+			let out;
+			let side;
+			let currentSpot = this.center;
+			switch(i) {
+				case 0:
+					refArm = this.northbase;
+					out = -this.sizeWidth;
+					side = -1;
+					break;
+				case 1:
+					refArm = this.eastbase;
+					out = 1;
+					side = -this.sizeWidth;
+					break;
+				case 2:
+					refArm = this.southbase;
+					out = this.sizeWidth;
+					side = 1;
+					break;
+				case 3:
+					refArm = this.eastbase;
+					out = -1;
+					side = this.sizeWidth;
+			}
+			for (let j = 0; j < refArm.length; j++) {
+				
+			}
+
+
+			
+		}
 	}
 }
 class BaseTable {
@@ -281,7 +310,11 @@ function tapTest(id) {
 	let checkValue = table.spaces[spaceId].valueTest;
 	
 	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
-	document.getElementById("messageBlock").innerText = message;	
+	document.getElementById("messageBlock").innerText = message;
+
+	if (spaceId = 0) {
+		game.buildArms();
+	}
 }
 
 
