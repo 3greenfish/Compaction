@@ -352,7 +352,7 @@ function highlightArms() {
 	for (let i = 0; i < game.layout.length; i++) {
 		let targetLayout = game.layout[i];
 		for (let j = 0; j < targetLayout.length; j++) {
-			let targetSpace = targetLayout[j];
+			let targetSpace = "g" + targetLayout[j];
 			document.getElementById(targetSpace).classList.add("highlight");
 		}
 	}
