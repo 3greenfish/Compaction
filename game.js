@@ -10,9 +10,9 @@ class BaseGame {
 		this.sizeWidth = 15;
 		this.sizeHeight = 15;
 		this.layout = [];
-		this.center;
-		this.stackSelect1;
-		this.stackSelect2;
+		this.center = null;
+		this.stackSelect1 = null;
+		this.stackSelect2 = null;
 		this.north.base = [
 			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
 		];
