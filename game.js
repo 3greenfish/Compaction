@@ -29,7 +29,7 @@ class BaseGame {
 	buildLayout() {
 		for (let i = 0; i < 5; i++) {
 			let newArm = [];
-			let refArm = this.stackBase + i;
+			let refArm = this["stackBase" + i];
 			let out;
 			let side;
 			let currentSpot = this.center;
@@ -51,7 +51,7 @@ class BaseGame {
 					out = this.sizeWidth;
 					side = 1;
 					break;
-				case 3:
+				case 4:
 //					refArm = this.eastbase;
 					out = -1;
 					side = this.sizeWidth;
@@ -63,7 +63,7 @@ class BaseGame {
 					nextSpot = currentSpot + out;
 				} else if (refArm[j] == "side") {
 					nextSpot = currentSpot + side;
-				} else if (refArm[j] == "Final") {
+				} else if (refArm[j] == "final") {
 					table.spaces[currentSpot].type = "final";
 					nextSpot = currentSpot;
 				}
@@ -266,7 +266,7 @@ function buildGrid(count, columns, rows) {
 	let rowStyle = "rows" + rows;
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
-	targetDiv.addEventListener("click", function(){ 
+	targetDiv.addEventListener("click", function(event){ 
 		tapTest(event.target.id); 
 	});
 
@@ -338,7 +338,7 @@ function tapTest(id) {
 	msg(message);
 
 	if (spaceId == 0) {
-		game.buildArms();
+		game.buildLayout();
 	}
 }
 
