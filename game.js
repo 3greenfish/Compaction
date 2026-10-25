@@ -86,6 +86,19 @@ class BaseGame {
 			}
 		}
 	}
+	setTypes() {
+		for (let i = 0; i < game.layout.length; i++) {
+			let targetLayout = game.layout[i];
+			for (let j = 0; j < targetLayout.length; j++) {
+				let targetSpace = table.spaces[targetLayout[j]];
+				if (targetSpace.type == "final") { 
+					continue; 
+				} else {
+					targetSpace.type = "stack";
+				}
+			}
+		}
+	}
 }
 class BaseTable {
 	constructor() {
@@ -225,13 +238,18 @@ function initializeGame() {
 	displayBlock.style.width = playArea.width;
 	displayBlock.style.height = playArea.height;
 
+	game.findCenter();
 	buildSpaceTable(game.sizeWidth, game.sizeHeight);
+
+	game.buildLayout();
+	game.setTypes();
+
+	buildGrid(game.sizeWidth, game.sizeHeight);
 
 	let targetDiv = document.getElementById("playGrid");
 	targetDiv.addEventListener("click", function(event){ tapTest(event.target.id); });
 
-	game.buildLayout();
-	highlightArms();
+//	highlightArms();
 }
 
 function getScreenSize() {
@@ -250,6 +268,7 @@ function buildSpaceTable(tilesWide, tilesHigh) {
 		addSpace.row = rowCounter;
 		addSpace.column = columnCounter;
 		addSpace.valueTest = "r" + i;
+		addSpace.type = "blank";
 		table.spaces.push(addSpace);
 
 		// this text to iterate for next tile.
@@ -259,14 +278,14 @@ function buildSpaceTable(tilesWide, tilesHigh) {
 			rowCounter += 1;
 		}
 	}
-	
-	buildGrid(spaceCount, tilesWide, tilesHigh);
 }
-function buildGrid(count, columns, rows) {
+function buildGrid(columns, rows) {
+	let count = columns * rows;
 	let output = "";
 
 	for (let i = 0; i < count; i ++) {
-		let addDiv = `<div id="g${i}">${i}</div>`;
+		let classy = table.spaces[i].type;			
+		let addDiv = `<div id="g${i}" class="${classy}">${i}</div>`;
 		output += addDiv;
 	}
 	let targetDiv = document.getElementById("playGrid");
@@ -278,11 +297,11 @@ function buildGrid(count, columns, rows) {
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
 
-	game.findCenter();
-	let findCenter = "g" + game.center;
-//	document.getElementById(findCenter).classList.add("highlight");
 }
 
+// game.findCenter();	
+//	let findCenter = "g" + game.center;
+//	document.getElementById(findCenter).classList.add("highlight");
 /*
 
 
@@ -345,6 +364,10 @@ function tapTest(id) {
 //	document.getElementById("messageBlock").innerText = message;
 
 	msg(message);
+
+	if (spaceId == 0) {
+		highlightArms();
+	}
 
 }
 
