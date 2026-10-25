@@ -316,7 +316,7 @@ function tapTest(id) {
 	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
 	document.getElementById("messageBlock").innerText = message;
 
-	if (spaceId = 0) {
+	if (spaceId == 0) {
 		game.buildArms();
 	}
 }
