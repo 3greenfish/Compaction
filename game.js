@@ -75,7 +75,7 @@ class BaseGame {
 		//having built the layout, apply cross-reference materials to the grid.
 		for (let k = 0; k < this.layout.length; k++) {
 			let refLayout = this.layout[k];
-			for (let l = 0; l < this.layout.length; l++) {
+			for (let l = 0; l < refLayout.length; l++) {
 				table.spaces[refLayout[l]].layout = k;
 				table.spaces[refLayout[l]].position = l;
 			}
@@ -221,6 +221,9 @@ function initializeGame() {
 	displayBlock.style.height = playArea.height;
 
 	buildSpaceTable(game.sizeWidth, game.sizeHeight);
+
+	let targetDiv = document.getElementById("playGrid");
+	targetDiv.addEventListener("click", function(event){ tapTest(event.target.id); });
 }
 
 function getScreenSize() {
@@ -266,9 +269,6 @@ function buildGrid(count, columns, rows) {
 	let rowStyle = "rows" + rows;
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
-	targetDiv.addEventListener("click", function(event){ 
-		tapTest(event.target.id); 
-	});
 
 	game.findCenter();
 	let findCenter = "g" + game.center;
