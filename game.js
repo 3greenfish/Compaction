@@ -7,11 +7,11 @@ class BaseGame {
 	sizeHeight;
 	layout; */
 	constructor() {
-		this.sizeWidth = 5;
-		this.sizeHeight = 5;
+		this.sizeWidth = 15;
+		this.sizeHeight = 15;
 		this.layout = [];
-		this.stack1 = null;
-		this.stack2 = null;
+		this.stackSelect1 = null;
+		this.stackSelect2 = null;
 	}
 }
 class BaseTable {
@@ -249,6 +249,8 @@ function buildGrid(count, columns, rows) {
 		tapTest(event.target.id); 
 	});
 } */
+
+
 
 
 function tapTest(id) {
