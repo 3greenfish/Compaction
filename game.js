@@ -1,3 +1,4 @@
+const messageArray = [];
 let deck = {};
 let playArea = {};
 let game = {};
@@ -213,7 +214,8 @@ function initializeGame() {
 	let cardOrder = showOrder();
 	displayText += cardOrder;
 	
-	messagesHere.innerText = displayText;
+//	messagesHere.innerText = displayText;
+	msg(displayText);
 	messagesHere.style.border = "1px solid blue";
 	displayBlock.style.width = playArea.width;
 	displayBlock.style.height = playArea.height;
@@ -330,7 +332,9 @@ function tapTest(id) {
 	let checkValue = table.spaces[spaceId].valueTest;
 	
 	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValue}. This space is located on row ${table.spaces[spaceId].row} and column ${table.spaces[spaceId].column}.` ;
-	document.getElementById("messageBlock").innerText = message;
+//	document.getElementById("messageBlock").innerText = message;
+
+	msg(message);
 
 	if (spaceId == 0) {
 		game.buildArms();
@@ -368,4 +372,16 @@ function getCard(value, reqSplit = false) {
 	}
 }
 
+
+function msg(messagetext) {
+	messageArray.unshift(messagetext);
+	if (messageArray.length > 25) {
+		messageArray.pop();
+	}
+	let finalArray = "";
+	for (let i = 0; i < messageArray.length; i++) {
+		finalArray += "<p>" + messageArray[i] + "</p>";
+	}
+	document.getElementById("messageBlock").innerHTML = finalArray;
+}
 
