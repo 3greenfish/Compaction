@@ -10,8 +10,26 @@ class BaseGame {
 		this.sizeWidth = 15;
 		this.sizeHeight = 15;
 		this.layout = [];
-		this.stackSelect1 = null;
-		this.stackSelect2 = null;
+		this.center;
+		this.stackSelect1;
+		this.stackSelect2;
+		this.north.base = [
+			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
+		];
+		this.south.base = [
+			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
+		];
+		this.east.base = [
+			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
+		];
+		this.west.base = [
+			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
+		];
+	}
+	findCenter() {
+		let centerFound = (this.sizeWidth * this.sizeHeight) - 1 ) / 2;
+		this.center = centerFound;
+		return centerFound;
 	}
 }
 class BaseTable {
@@ -179,6 +197,7 @@ function buildSpaceTable(tilesWide, tilesHigh) {
 			rowCounter += 1;
 		}
 	}
+	
 	buildGrid(spaceCount, tilesWide, tilesHigh);
 }
 function buildGrid(count, columns, rows) {
@@ -199,6 +218,9 @@ function buildGrid(count, columns, rows) {
 	targetDiv.addEventListener("click", function(){ 
 		tapTest(event.target.id); 
 	});
+
+	game.findCenter();
+	document.getElementById(game.center).classList.add("highlight");
 }
 
 /*
