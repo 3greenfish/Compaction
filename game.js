@@ -13,16 +13,16 @@ class BaseGame {
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
-		this.north.base = [
+		this.northbase = [
 			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
 		];
-		this.south.base = [
+		this.southbase = [
 			"out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"
 		];
-		this.east.base = [
+		this.eastbase = [
 			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
 		];
-		this.west.base = [
+		this.westbase = [
 			"out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"
 		];
 	}
