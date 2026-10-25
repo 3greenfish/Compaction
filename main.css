@@ -37,12 +37,6 @@
 	border: 1px solid white;
 }
 
-.highlight {
-	background: #00ee00;
-	font-weight: bold;
-}
-
 #playGrid .highlight {
-	background: #0000ee;
-	border: 1px solid black;
+	background: #00aa00;
 }
