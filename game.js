@@ -16,10 +16,10 @@ class BaseGame {
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
 		this.stackBase0 = ["final"];
-		this.stackBase1 = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
-		this.stackBase2 = ["out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
+		this.stackBase1 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase2 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
 		this.stackBase3 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
-		this.stackBase4 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out"];
 	}
 	findCenter() {
 		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
