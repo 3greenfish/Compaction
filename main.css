@@ -36,3 +36,11 @@
 	background: #eeeeee;
 	border: 1px solid white;
 }
+
+#playGrid .blank {
+	background: #ffffff;
+}
+
+#playGrid .highlight {
+	background: #00aa00;
+}

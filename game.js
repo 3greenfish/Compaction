@@ -1,18 +1,113 @@
+const messageArray = [];
 let deck = {};
-let layout = {};
+let playArea = {};
 let game = {};
+let table = {};
 class BaseGame {
-	sizeWidth;
+/*	sizeWidth;
 	sizeHeight;
-	layout;
+	layout; */
 	constructor() {
-		this.sizeWidth = 5;
-		this.sizeHeight = 5;
+		this.deals = 0;
+		this.sizeWidth = 15;
+		this.sizeHeight = 15;
+		this.layout = [];
+		this.center = null;
+		this.stackSelect1 = null;
+		this.stackSelect2 = null;
+		this.stackBase0 = ["final"];
+		this.stackBase1 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase2 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase3 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+	}
+	findCenter() {
+		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
+		this.center = centerFound;
+		return centerFound;
+	}
+	buildLayout() {
+		for (let i = 0; i < 5; i++) {
+			let newArm = [];
+			let refArm = this["stackBase" + i];
+			let out;
+			let side;
+			let currentSpot = this.center;
+			switch(i) {
+				case 0:
+					break;
+				case 1:
+//					refArm = this.northbase;
+					out = -this.sizeWidth;
+					side = -1;
+					break;
+				case 2:
+//					refArm = this.eastbase;
+					out = 1;
+					side = -this.sizeWidth;
+					break;
+				case 3:
+//					refArm = this.southbase;
+					out = this.sizeWidth;
+					side = 1;
+					break;
+				case 4:
+//					refArm = this.eastbase;
+					out = -1;
+					side = this.sizeWidth;
+			}			
+			for (let j = 0; j < refArm.length; j++) {
+				let nextSpot;
+
+				if (refArm[j] == "out") {
+					nextSpot = currentSpot + out;
+				} else if (refArm[j] == "side") {
+					nextSpot = currentSpot + side;
+				} else if (refArm[j] == "final") {
+					table.spaces[currentSpot].type = "final";
+					nextSpot = currentSpot;
+				}
+				newArm.push(nextSpot);
+				currentSpot = nextSpot;
+			}
+			this.layout.push(newArm);
+		}
+		//having built the layout, apply cross-reference materials to the grid.
+		msg("number of layouts: " + this.layout.length);
+		for (let k = 0; k < this.layout.length; k++) {
+			let refLayout = this.layout[k];
+			let displayLayout = refLayout.toString();
+			msg(displayLayout);
+
+			for (let l = 0; l < refLayout.length; l++) {
+				let space = refLayout[l];
+				table.spaces[space].layout = k;
+				table.spaces[space].position = l;
+			}
+		}
+	}
+	setTypes() {
+		for (let i = 0; i < game.layout.length; i++) {
+			let targetLayout = game.layout[i];
+			for (let j = 0; j < targetLayout.length; j++) {
+				let targetSpace = table.spaces[targetLayout[j]];
+				if (targetSpace.type == "final") { 
+					continue; 
+				} else {
+					targetSpace.type = "stack";
+				}
+			}
+		}
+	}
+}
+class BaseTable {
+	constructor() {
+		this.spaces = [];
 	}
 }
 class BaseDeck {
-	cards;
-	order;
+/*	cards;
+	order; */
 	constructor() {
 		this.cards = [];
 		for (let s = 0; s < 4; s++) {
@@ -121,14 +216,15 @@ class BaseDeck {
 }
 
 function initializeGame() {
-	deck = new BaseDeck;
-	game = new BaseGame;
+	deck = new BaseDeck();
+	game = new BaseGame();
+	table = new BaseTable();
 //	shuffle();
 	let deckorder = deck.order.toString();
 	let getCardTest = deck.order[5];
 	let specificCard = getCard(getCardTest);
 	getScreenSize();	
-	let displayText = "width: " + layout.width + ", height: " + layout.height + " / " + deckorder + " -- " + specificCard + "/";
+	let displayText = "width: " + playArea.width + ", height: " + playArea.height + " / " + deckorder + " -- " + specificCard + "/";
 	
 	let displayBlock = document.getElementById("displayBlock");
 	let messagesHere = document.getElementById("messageBlock");
@@ -136,39 +232,109 @@ function initializeGame() {
 	let cardOrder = showOrder();
 	displayText += cardOrder;
 	
-	messagesHere.innerText = displayText;
+//	messagesHere.innerText = displayText;
+	msg(displayText);
 	messagesHere.style.border = "1px solid blue";
-	displayBlock.style.width = layout.width;
-	displayBlock.style.height = layout.height;
+	displayBlock.style.width = playArea.width;
+	displayBlock.style.height = playArea.height;
+
+	game.findCenter();
+	buildSpaceTable(game.sizeWidth, game.sizeHeight);
+
+	game.buildLayout();
+	game.setTypes();
 
 	buildGrid(game.sizeWidth, game.sizeHeight);
+
+	let targetDiv = document.getElementById("playGrid");
+	targetDiv.addEventListener("click", function(event){ tapTest(event.target.id); });
+
+//	highlightArms();
 }
 
 function getScreenSize() {
-	layout.width = window.innerWidth;
-	layout.height = window.innerHeight;
+	playArea.width = window.innerWidth;
+	playArea.height = window.innerHeight;
 }
 
-function buildGrid(tilesWide, tilesHigh) {
+function buildSpaceTable(tilesWide, tilesHigh) {
+	let spaceCount = tilesWide * tilesHigh;
+	let columnCounter = 0;
+	let rowCounter = 0;
+
+	//build dataset
+	for (let i = 0; i < spaceCount; i++) {
+		let addSpace = {};
+		addSpace.row = rowCounter;
+		addSpace.column = columnCounter;
+		addSpace.valueTest = "r" + i;
+		addSpace.type = "blank";
+		table.spaces.push(addSpace);
+
+		// this text to iterate for next tile.
+		columnCounter += 1;
+		if (columnCounter >= tilesWide) {
+			columnCounter = 0;
+			rowCounter += 1;
+		}
+	}
+}
+function buildGrid(columns, rows) {
+	let count = columns * rows;
+	let output = "";
+
+	for (let i = 0; i < count; i ++) {
+		let classy = table.spaces[i].type;			
+		let addDiv = `<div id="g${i}" class="${classy}">${i}</div>`;
+		output += addDiv;
+	}
+	let targetDiv = document.getElementById("playGrid");
+	targetDiv.innerHTML = output;
+
+	//set style based upon size
+	let columnStyle = "columns" + columns;
+	let rowStyle = "rows" + rows;
+	
+	targetDiv.classList.add(columnStyle, rowStyle);	
+
+}
+
+// game.findCenter();	
+//	let findCenter = "g" + game.center;
+//	document.getElementById(findCenter).classList.add("highlight");
+/*
+
+
+	
 	let targetDiv = document.getElementById("playGrid");
 	let totalSpaces = tilesWide * tilesHigh;
-	let columnCounter = 1;
-	let rowCounter = 1;
 	let output = "";
 	
 	for (let i = 0; i < totalSpaces; i++) {
 		let spaceId = rowCounter.toString(16) + columnCounter.toString(16);
 		let addDiv = `<div id="${spaceId}">${i}</div>`;
+
+		let addSourceBox = {};
+		addSourceBox.iteration = i;	//probably not necessary
+		addSourceBox.row = rowCounter;
+		addSourceBox.column = columnCounter;
+		addSourceBox.id = spaceId;
+		
+		game.layout.push(addSourceBox);
+		
+		// this text to iterate for next tile.
 		columnCounter += 1;
 		if (columnCounter > tilesWide) {
 			columnCounter = 1;
 			rowCounter += 1;
 		}
+
+		// build grid on page
 		output += addDiv;
 	}
 
-	columnStyle = "columns" + tilesWide;
-	rowStyle = "rows" + tilesHigh;
+	let columnStyle = "columns" + tilesWide;
+	let rowStyle = "rows" + tilesHigh; */
 
 /* figure this out later, how to remove classes
 
@@ -177,12 +343,43 @@ function buildGrid(tilesWide, tilesHigh) {
 		targetDiv.classList.forEach()
 	}
 	targetDiv.classList.remove();
-*/
 	
 	targetDiv.classList.add(columnStyle, rowStyle);	
 	targetDiv.innerHTML = output;
+	targetDiv.addEventListener("click", function(){ 
+		tapTest(event.target.id); 
+	});
+} */
+
+
+
+
+function tapTest(id) {
+	if (!id || !id.startsWith("g")) { return; }
+	let spaceId = id.slice(1);
+	let checkValues = table.spaces[spaceId];
+	
+	
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.valueTest}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}.` ;
+//	document.getElementById("messageBlock").innerText = message;
+
+	msg(message);
+
+	if (spaceId == 0) {
+		highlightArms();
+	}
+
 }
 
+function highlightArms() {
+	for (let i = 0; i < game.layout.length; i++) {
+		let targetLayout = game.layout[i];
+		for (let j = 0; j < targetLayout.length; j++) {
+			let targetSpace = "g" + targetLayout[j];
+			document.getElementById(targetSpace).classList.add("highlight");
+		}
+	}
+}
 
 
 
@@ -216,4 +413,16 @@ function getCard(value, reqSplit = false) {
 	}
 }
 
+
+function msg(messagetext) {
+	messageArray.unshift(messagetext);
+	if (messageArray.length > 25) {
+		messageArray.pop();
+	}
+	let finalArray = "";
+	for (let i = 0; i < messageArray.length; i++) {
+		finalArray += "<p>" + messageArray[i] + "</p>";
+	}
+	document.getElementById("messageBlock").innerHTML = finalArray;
+}
 
