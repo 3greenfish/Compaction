@@ -12,11 +12,28 @@ class BaseGame {
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
-		this.stackBase0 = ["final"];
+		this.layoutInfo = [
+			{ path: ["final"],
+			  initialDeal: 1,
+			  deal: 0 },
+			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 4,
+			  deal: 4 },
+			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 5,
+			  deal: 5 },
+			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 4,
+			  deal: 4 },
+			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 5,
+			  deal: 5 }
+		];
+/*		this.stackBase0 = ["final"];
 		this.stackBase1 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 		this.stackBase2 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 		this.stackBase3 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
-		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"]; */
 	}
 	findCenter() {
 		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
@@ -26,7 +43,7 @@ class BaseGame {
 	buildLayout() {
 		for (let i = 0; i < 5; i++) {
 			let newArm = [];
-			let refArm = this["stackBase" + i];
+			let refArm = this.layoutInfo[i].path;
 			let out;
 			let side;
 			let currentSpot = this.center;
@@ -93,11 +110,13 @@ class BaseGame {
 		}
 	}
 }
+
 class BaseTable {
 	constructor() {
 		this.spaces = [];
 	}
 }
+
 class BaseDeck {
 	constructor() {
 		this.cards = [];
@@ -217,7 +236,7 @@ function buildGrid(columns, rows) {
 
 	for (let i = 0; i < count; i ++) {
 		let classy = table.spaces[i].type;			
-		let addDiv = `<div id="g${i}" class="${classy}">${i}</div>`;
+		let addDiv = `<div id="g${i}" class="${classy}"></div>`;
 		output += addDiv;
 	}
 	let targetDiv = document.getElementById("playGrid");
