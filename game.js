@@ -195,11 +195,13 @@ function deal(type) {
 }
 
 function refreshDisplay() {
+	msg("refreshDisplay called");
 	for (let i = 0; i < game.layouts.length; i++) {
 		for (let j = 0; j < game.layouts[i].length; j++) {
 			let layoutCheck = game.layouts[i];
 			let targetSpace = "g" + layoutCheck[j];
 			let targetStack = game.stacks[i][j];
+			msg("targetStack is: " + targetStack.toString());
 			let cardValue;
 
 			if (targetStack.length == 1) {
@@ -207,6 +209,7 @@ function refreshDisplay() {
 			}
 
 			let cardDisplay = getCard(cardValue);
+			msg ("card value acquired is " + cardDisplay);
 
 			document.getElementById(targetSpace).innerText = cardDisplay;
 		}
