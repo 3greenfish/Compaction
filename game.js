@@ -12,22 +12,27 @@ class BaseGame {
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
+		this.stacks = [];
 		this.layoutInfo = [
 			{ path: ["final"],
 			  initialDeal: 1,
 			  deal: 0 },
 			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
 			  initialDeal: 4,
-			  deal: 4 },
+			  deal: 4,
+			  extend: 1 },
 			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
 			  initialDeal: 5,
-			  deal: 5 },
+			  deal: 5,
+			  extend: 1 },
 			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
 			  initialDeal: 4,
-			  deal: 4 },
+			  deal: 4,
+			  extend: 1 },
 			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
 			  initialDeal: 5,
-			  deal: 5 }
+			  deal: 5,
+			  extend: 1 }
 		];
 /*		this.stackBase0 = ["final"];
 		this.stackBase1 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
@@ -167,7 +172,45 @@ class BaseDeck {
 		for (let i = 0; i < this.cards.length; i++) {
 			this.order.push(i);
 		}
-  }
+	}
+	drawNextCard() {		//draws the next card in preparation for placing; removes card from deck order list.
+		return deck.order.shift();
+	}
+}
+
+function deal(type) {
+	if (type == "initial") {
+		msg("initial deal called");
+		for (let i = 0; i < game.layouts.length; i++) {
+			let layoutLength = game.layouts[i].initialDeal;
+			let newStack = [];
+			for (let k = 0; k < layoutLength; k++) {
+				newStack.push(deck.drawNextCard());
+			}
+			game.stacks.push(newStack);
+		}
+	} else { msg("only initial deal set up yet"); }
+
+	// need to calculate where to deal
+}
+
+function refreshDisplay() {
+	for (let i = 0; i < game.layouts.length; i++) {
+		for (let j = 0; j < game.layouts[i].length; j++) {
+			let layoutCheck = game.layouts[i];
+			let targetSpace = "g" + layoutCheck[j];
+			let targetStack = game.stacks[i][j];
+			let cardValue;
+
+			if (targetStack.length == 1) {
+				cardValue = targetStack[0];
+			}
+
+			let cardDisplay = getCard(cardValue);
+
+			document.getElementById(targetSpace).innerText = cardDisplay;
+		}
+	}
 }
 
 function initializeGame() {
@@ -278,7 +321,9 @@ function tapTest(id) {
 	msg(message);
 
 	if (spaceId == 0) {
-		highlightArms();
+		//highlightArms();
+		deal("initial");
+		refreshDisplay();
 	}
 
 }
