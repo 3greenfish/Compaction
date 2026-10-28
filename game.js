@@ -178,14 +178,17 @@ class BaseDeck {
 	}
 }
 
-function deal(type) {
+function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 	if (type == "initial") {
 		msg("initial deal called");
 		for (let i = 0; i < game.layout.length; i++) {
 			let layoutLength = game.layout[i].initialDeal;
+			msg("layout length is " + layoutLength);
 			let newStack = [];
 			for (let k = 0; k < layoutLength; k++) {
-				newStack.push(deck.drawNextCard());
+				let newCard = deck.drawNextCard();
+				msg("new card is " + newCard);
+				newStack.push(newCard);
 			}
 			msg("new stack is " + newStack.toString());
 			game.stacks[i].push(newStack);
