@@ -181,8 +181,8 @@ class BaseDeck {
 function deal(type) {
 	if (type == "initial") {
 		msg("initial deal called");
-		for (let i = 0; i < game.layouts.length; i++) {
-			let layoutLength = game.layouts[i].initialDeal;
+		for (let i = 0; i < game.layout.length; i++) {
+			let layoutLength = game.layout[i].initialDeal;
 			let newStack = [];
 			for (let k = 0; k < layoutLength; k++) {
 				newStack.push(deck.drawNextCard());
@@ -197,9 +197,9 @@ function deal(type) {
 
 function refreshDisplay() {
 	msg("refreshDisplay called");
-	for (let i = 0; i < game.layouts.length; i++) {
-		for (let j = 0; j < game.layouts[i].length; j++) {
-			let layoutCheck = game.layouts[i];
+	for (let i = 0; i < game.layout.length; i++) {
+		for (let j = 0; j < game.layout[i].length; j++) {
+			let layoutCheck = game.layout[i];
 			let targetSpace = "g" + layoutCheck[j];
 			let targetStack = game.stacks[i][j];
 			msg("targetStack is: " + targetStack.toString());
