@@ -187,7 +187,8 @@ function deal(type) {
 			for (let k = 0; k < layoutLength; k++) {
 				newStack.push(deck.drawNextCard());
 			}
-			game.stacks.push(newStack);
+			msg("new stack is " + newStack.toString());
+			game.stacks[i].push(newStack);
 		}
 	} else { msg("only initial deal set up yet"); }
 
@@ -326,6 +327,7 @@ function tapTest(id) {
 	if (spaceId == 0) {
 		//highlightArms();
 		deal("initial");
+		msg("initial deal completed");
 		refreshDisplay();
 	}
 
