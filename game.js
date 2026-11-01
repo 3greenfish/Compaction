@@ -178,24 +178,24 @@ class BaseDeck {
 	}
 }
 
-function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
+function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN REFRESHDISPLAY BELOW
 	if (type == "initial") {
 		msg("initial deal called, layouts to call: " + game.layout.length);
 		for (let i = 0; i < game.layout.length; i++) {
 			let newStackLayout = [];
 			game.stacks.push(newStackLayout);
 			let layoutLength = game.layoutInfo[i].initialDeal;
-			msg("layout length is " + layoutLength);
+//			msg("layout length is " + layoutLength);
 			for (let k = 0; k < layoutLength; k++) {
 				let newStack = [];
 				let newCardStack = [];
 				let newCard = deck.drawNextCard();
-				msg("new card is " + newCard);
+//				msg("new card is " + newCard);
 				newCardStack.push(newCard);
 				newStack.push(newCardStack);
 
 				let msgStack = newStack.toString();
-				msg("new stack is " + msgStack);
+//				msg("new stack is " + msgStack);
 				game.stacks[i].push(newStack);
 			}
 		}
@@ -205,7 +205,7 @@ function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 }
 
 function refreshDisplay() {
-	msg("refreshDisplay called");
+	msg("refreshDisplay called, layouts to call: " + game.layout.length);
 	for (let i = 0; i < game.layout.length; i++) {
 		for (let j = 0; j < game.layout[i].length; j++) {
 			let layoutCheck = game.layout[i];
@@ -224,7 +224,7 @@ function refreshDisplay() {
 			}
 
 			let cardDisplay = (cardValue == "E" ) ? "E" : getCard(cardValue);
-			msg ("card value acquired is " + cardDisplay);
+//			msg ("card value acquired is " + cardDisplay);
 
 			document.getElementById(targetSpace).innerText = cardDisplay;
 		}
