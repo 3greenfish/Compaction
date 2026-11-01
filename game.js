@@ -191,7 +191,7 @@ function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 				newStack.push(newCard);
 			}
 			msg("new stack is " + newStack.toString());
-			game.stacks[i].push(newStack);
+			game.stacks[i][k].push(newStack);
 		}
 	} else { msg("only initial deal set up yet"); }
 
