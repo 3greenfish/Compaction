@@ -12,11 +12,33 @@ class BaseGame {
 		this.center = null;
 		this.stackSelect1 = null;
 		this.stackSelect2 = null;
-		this.stackBase0 = ["final"];
+		this.stacks = [];
+		this.layoutInfo = [
+			{ path: ["final"],
+			  initialDeal: 1,
+			  deal: 0 },
+			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 4,
+			  deal: 4,
+			  extend: 1 },
+			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 5,
+			  deal: 5,
+			  extend: 1 },
+			{ path: ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 4,
+			  deal: 4,
+			  extend: 1 },
+			{ path: ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"],
+			  initialDeal: 5,
+			  deal: 5,
+			  extend: 1 }
+		];
+/*		this.stackBase0 = ["final"];
 		this.stackBase1 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 		this.stackBase2 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
 		this.stackBase3 = ["out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
-		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"];
+		this.stackBase4 = ["out", "out", "out", "side", "out", "side", "out", "side", "out", "side", "out", "side"]; */
 	}
 	findCenter() {
 		let centerFound = ((this.sizeWidth * this.sizeHeight) - 1 ) / 2;
@@ -26,7 +48,7 @@ class BaseGame {
 	buildLayout() {
 		for (let i = 0; i < 5; i++) {
 			let newArm = [];
-			let refArm = this["stackBase" + i];
+			let refArm = this.layoutInfo[i].path;
 			let out;
 			let side;
 			let currentSpot = this.center;
@@ -93,11 +115,13 @@ class BaseGame {
 		}
 	}
 }
+
 class BaseTable {
 	constructor() {
 		this.spaces = [];
 	}
 }
+
 class BaseDeck {
 	constructor() {
 		this.cards = [];
@@ -148,7 +172,63 @@ class BaseDeck {
 		for (let i = 0; i < this.cards.length; i++) {
 			this.order.push(i);
 		}
-  }
+	}
+	drawNextCard() {		//draws the next card in preparation for placing; removes card from deck order list.
+		return deck.order.shift();
+	}
+}
+
+function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN REFRESHDISPLAY BELOW
+	if (type == "initial") {
+		msg("initial deal called, layouts to call: " + game.layout.length);
+		for (let i = 0; i < game.layout.length; i++) {
+			let newStackLayout = [];
+			game.stacks.push(newStackLayout);
+			let layoutLength = game.layoutInfo[i].initialDeal;
+//			msg("layout length is " + layoutLength);
+			for (let k = 0; k < layoutLength; k++) {
+				let newStack = [];
+				let newCardStack = [];
+				let newCard = deck.drawNextCard();
+//				msg("new card is " + newCard);
+				newCardStack.push(newCard);
+				newStack.push(newCardStack);
+
+				let msgStack = newStack.toString();
+//				msg("new stack is " + msgStack);
+				game.stacks[i].push(newStack);
+			}
+		}
+	} else { msg("only initial deal set up yet"); }
+
+	// need to calculate where to deal
+}
+
+function refreshDisplay() {
+	msg("refreshDisplay called, layouts to call: " + game.layout.length);
+	for (let i = 0; i < game.layout.length; i++) {
+		for (let j = 0; j < game.layout[i].length; j++) {
+			let layoutCheck = game.layout[i];
+			let targetSpace = "g" + layoutCheck[j];
+			let targetStack = game.stacks[i][j];
+			msg("targetStack is: " + targetStack.toString());
+			let cardValue;
+
+			if (targetStack.length == 1) {
+				cardValue = targetStack[0];
+			} else if (targetStack.length == 0) {
+				cardValue = "E";
+			} else if (targetStack.length > 1) {
+				let len = targetStack.length - 1;
+				cardValue = targetStack[len];
+			}
+
+			let cardDisplay = (cardValue == "E" ) ? "E" : getCard(cardValue);
+//			msg ("card value acquired is " + cardDisplay);
+
+			document.getElementById(targetSpace).innerText = cardDisplay;
+		}
+	}
 }
 
 function initializeGame() {
@@ -217,7 +297,7 @@ function buildGrid(columns, rows) {
 
 	for (let i = 0; i < count; i ++) {
 		let classy = table.spaces[i].type;			
-		let addDiv = `<div id="g${i}" class="${classy}">${i}</div>`;
+		let addDiv = `<div id="g${i}" class="${classy}"></div>`;
 		output += addDiv;
 	}
 	let targetDiv = document.getElementById("playGrid");
@@ -259,7 +339,10 @@ function tapTest(id) {
 	msg(message);
 
 	if (spaceId == 0) {
-		highlightArms();
+		//highlightArms();
+		deal("initial");
+		msg("initial deal completed");
+		refreshDisplay();
 	}
 
 }
@@ -309,7 +392,7 @@ function getCard(value, reqSplit = false) {
 
 function msg(messagetext) {
 	messageArray.unshift(messagetext);
-	if (messageArray.length > 25) {
+	if (messageArray.length > 50) {
 		messageArray.pop();
 	}
 	let finalArray = "";
