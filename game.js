@@ -186,17 +186,18 @@ function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 			game.stacks.push(newStackLayout);
 			let layoutLength = game.layoutInfo[i].initialDeal;
 			msg("layout length is " + layoutLength);
-			let newStack = [];
 			for (let k = 0; k < layoutLength; k++) {
+				let newStack = [];
 				let newCardStack = [];
 				let newCard = deck.drawNextCard();
 				msg("new card is " + newCard);
 				newCardStack.push(newCard);
 				newStack.push(newCardStack);
+
+				let msgStack = newStack.toString();
+				msg("new stack is " + msgStack);
+				game.stacks[i].push(newStack);
 			}
-			let msgStack = newStack.toString();
-			msg("new stack is " + msgStack);
-			game.stacks[i].push(newStack);
 		}
 	} else { msg("only initial deal set up yet"); }
 
