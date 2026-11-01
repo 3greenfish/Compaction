@@ -182,16 +182,18 @@ function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 	if (type == "initial") {
 		msg("initial deal called, layouts to call: " + game.layout.length);
 		for (let i = 0; i < game.layout.length; i++) {
+			let newStackLayout = [];
+			game.stacks.push(newStackLayout);
 			let layoutLength = game.layoutInfo[i].initialDeal;
 			msg("layout length is " + layoutLength);
 			let newStack = [];
 			for (let k = 0; k < layoutLength; k++) {
-				let newCard = deck.drawNextCard();
+				let newCard = [deck.drawNextCard()];
 				msg("new card is " + newCard);
 				newStack.push(newCard);
 			}
 			msg("new stack is " + newStack.toString());
-			game.stacks[i][k].push(newStack);
+			game.stacks[i].push(newStack);
 		}
 	} else { msg("only initial deal set up yet"); }
 
