@@ -326,16 +326,28 @@ function buildGrid(columns, rows) {
 	});
 } */
 
-
+function getValue(layout, position) {
+	let targetStack = game.stacks[layout][position];
+	let cardValue;
+	if (targetStack.length == 1) {
+		cardValue = targetStack[0];
+	} else if (targetStack.length == 0) {
+		cardValue = "E";
+	} else if (targetStack.length > 1) {
+		let len = targetStack.length - 1;
+		cardValue = targetStack[len];
+	}
+	return getValue;
+}
 
 
 function tapTest(id) {
 	if (!id || !id.startsWith("g")) { return; }
 	let spaceId = id.slice(1);
 	let checkValues = table.spaces[spaceId];
+	let thisCard = getValue(checkValues.layout, checkValues.position);
 	
-	
-	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.valueTest}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}.` ;
+	let message = `you have clicked on a space identified as ${id}. The space ID is ${spaceId}. The check value is ${checkValues.valueTest}. This space is located on row ${checkValues.row} and column ${checkValues.column}. The space type is ${checkValues.type}, the layout number is ${checkValues.layout} and position is ${checkValues.position}. The card in this slot is ${thisCard}.` ;
 	msg(message);
 
 	if (spaceId == 0) {
