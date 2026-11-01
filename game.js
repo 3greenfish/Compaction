@@ -182,7 +182,7 @@ function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 	if (type == "initial") {
 		msg("initial deal called");
 		for (let i = 0; i < game.layout.length; i++) {
-			let layoutLength = game.layout[i].initialDeal;
+			let layoutLength = game.layoutInfo[i].initialDeal;
 			msg("layout length is " + layoutLength);
 			let newStack = [];
 			for (let k = 0; k < layoutLength; k++) {
