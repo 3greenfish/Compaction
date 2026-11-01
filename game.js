@@ -212,9 +212,14 @@ function refreshDisplay() {
 
 			if (targetStack.length == 1) {
 				cardValue = targetStack[0];
+			} else if (targetStack.length == 0) {
+				cardValue = "E";
+			} else if (targetStack.length > 1) {
+				let len = targetStack.length - 1;
+				cardValue = targetStack[len];
 			}
 
-			let cardDisplay = getCard(cardValue);
+			let cardDisplay = (cardValue = "E" ) ? "E" : getCard(cardValue);
 			msg ("card value acquired is " + cardDisplay);
 
 			document.getElementById(targetSpace).innerText = cardDisplay;
