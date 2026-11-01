@@ -219,7 +219,7 @@ function refreshDisplay() {
 				cardValue = targetStack[len];
 			}
 
-			let cardDisplay = (cardValue = "E" ) ? "E" : getCard(cardValue);
+			let cardDisplay = (cardValue == "E" ) ? "E" : getCard(cardValue);
 			msg ("card value acquired is " + cardDisplay);
 
 			document.getElementById(targetSpace).innerText = cardDisplay;
@@ -388,7 +388,7 @@ function getCard(value, reqSplit = false) {
 
 function msg(messagetext) {
 	messageArray.unshift(messagetext);
-	if (messageArray.length > 25) {
+	if (messageArray.length > 50) {
 		messageArray.pop();
 	}
 	let finalArray = "";
