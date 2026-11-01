@@ -180,7 +180,7 @@ class BaseDeck {
 
 function deal(type) {				//ISSUE IS SOMEWHERE IN HERE OR IN DRAWNEXTCARD ABOVE
 	if (type == "initial") {
-		msg("initial deal called");
+		msg("initial deal called, layouts to call: " + game.layout.length);
 		for (let i = 0; i < game.layout.length; i++) {
 			let layoutLength = game.layoutInfo[i].initialDeal;
 			msg("layout length is " + layoutLength);
